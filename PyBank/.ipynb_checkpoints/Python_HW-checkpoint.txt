@@ -1,0 +1,95 @@
+Background
+You've made it! It's time to put away the Excel sheet and join the big leagues. Welcome to the world of programming with Python. 
+In this homework assignment, you'll be using the concepts you've learned to complete the required PyBank Python activity, and if 
+you wish to stretch your skills even further, the optional PyRamen Python activity. 
+Both activities present a real-world situation in which your newfound Python skills will come in handy. 
+These activities are far from easy, though, so expect some hard work ahead!
+
+
+
+PyBank (Required)
+
+In this activity, you are tasked with creating a Python script for analyzing the financial records of your company. 
+You will be provided with a financial dataset in this file: budget_data.csv. This dataset is composed of two columns, 
+Date and Profit/Losses. (Thankfully, your company has rather lax standards for accounting, so the records are simple.)
+Your task is to create a Python script that analyzes the records to calculate each of the following:
+
+
+The total number of months included in the dataset.
+
+
+The net total amount of Profit/Losses over the entire period.
+
+
+The average of the changes in Profit/Losses over the entire period.
+
+
+The greatest increase in profits (date and amount) over the entire period.
+
+
+The greatest decrease in losses (date and amount) over the entire period.
+
+
+Your resulting analysis should look similar to the following:
+Financial Analysis
+----------------------------
+Total Months: 86
+Total: $38382578
+Average  Change: $-2315.12
+Greatest Increase in Profits: Feb-2012 ($1926159)
+Greatest Decrease in Profits: Sep-2013 ($-2196167)
+Your final script should print the analysis to the terminal and export a text file with the results.
+
+
+
+
+
+
+The following is what I came up with before I got stuck not sure if it is correct?
+
+# Importing the path 
+import csv
+from pathlib import Path
+print(f"Current Working Directory: {Path.cwd()}")
+
+# Setting the path using Pathlib
+company_data = Path("../Pybank/budget_data.csv")
+
+# Initialising variables
+net_total = 0
+Avg_change_pl = 0
+greatest_increase_profits = 0
+greatest_decrease_losses = 0
+count = 0
+PnL_list = []
+
+# Just formattint the print section 
+print("Company Financial Analysis")
+print("-------------------------------------")
+# Counting total months doing a with open file and saving it as
+with open("budget_data.csv", "r") as company_data:
+    company_data_reader = csv.reader(company_data)
+   
+    
+    # When complete add this is to write it all to other file. 
+    # with open('company_data_analysed.csv', 'w') as company_data_analysed:
+    #     company_data_writer = csv.writer(company_data_analysed)
+    
+    
+# Doing a for loop to loop through rows and calculate total by adding 1 every time we loop through a row
+    for line in company_data_reader:
+        print("Total Months: ", (sum(1 for row in company_data_reader)))
+        
+# The net total amount of Profit/Losses over the entire period
+# Doing for loop to loop through rows again  
+with open("budget_data.csv", "r") as company_data:
+    company_data_reader = csv.DictReader(company_data)
+    
+    for row in company_data_reader:
+        number = int(row['Profit/Losses'])
+        count = count + 1
+        net_total = number + count
+        print(net_total)
+        
+
+        
